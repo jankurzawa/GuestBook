@@ -8,10 +8,12 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
     }
 
     #pageDetails h1{
         justify-content: flex-start;
+        font-size: 30px;
     }
 
     #pagination{
@@ -26,7 +28,7 @@
     }
 
     #specificPageInput{
-        margin-left: 17%;
+        margin-left: 25%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -36,6 +38,17 @@
         width: 50px;
         height: 28px;
     }
+    #numberOfVictims h4{
+        justify-content: center;
+        margin: 17%;
+
+    }
+    .table body{
+        font-size: 8px;
+    }
+    #parentOfNumberOfPage{
+        justify-content: center;
+    }
 
 </style>
 
@@ -44,12 +57,15 @@
     
     <div id="pagination">   
         <div id="numberOfVictims">
-            <a asp-action="PageDown"><</a>
-            <h4 id="numberOfPage">1</h4>
-            <a asp-action="PageUp">></a>
+            <img id="leftArrow" src="~/Pictures/ArrowBack.png" onclick="leftArrowClick()">
+            <div id="parentOfNumberOfPage">
+                <h4 id="numberOfPage">@TempData["numberOfPage"]</h4>
+            </div>
+            
+            <a id="rightArrow" src="~/Pictures/ArrowForward.png" asp-area="" asp-controller="Posts" asp-action="PageUp">PageUp</a>
         </div>
         <div id="specificPageInput">
-            <input type="text" id="numberOfPageInput" name="numberOfPage" cols="2" rows="1" data-role="page-number-input">
+            <input type="text" id="numberOfPageInput" name="numberOfPage" cols="2" rows="1" data-role="page-number-input" onchange="pickPageFromInputLabel(value)">
         </div>
     </div>
     
@@ -67,16 +83,13 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Content)
             </th>
             <th></th>
         </tr>
     </thead>
     <body>
-@foreach (var item in GuestBook.Data.DAL.PostRepository.GetPage(1)) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateTime)
@@ -85,41 +98,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
         </tr>
 }
+    <script src="~/js/pagination.js"></script>
     </body>
-    <script>
-        let counterMinusElem = document.getElementById("leftArrow");
-        let counterPlusElem = document.getElementById("rightArrow");
-        let numberOfPage = document.getElementById("numberOfPage");
-        let count = 1;
-        let numberOfPages = Model.Count();
-        
-        counterMinusElem.addEventListener("click",()=>{
-            count--;
-            if (count < 1)
-            {
-                count = 1;
-            }
-            numberOfPage.innerHTML = count;
-        )}
-        counterPlusElem.addEventListener("click",()=>{
-            count++;
-            if (count > 3)
-            {
-                count = numberOfPages;
-            }
-            numberOfPage.innerHTML = count;
-        )}
-        function updateDisplay(){
-            numberOfPage.innerHTML = count;
-        };
-
-        updateDisplay();
-    </script>
 </table>

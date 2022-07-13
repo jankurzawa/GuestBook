@@ -26,15 +26,18 @@ namespace GuestBook.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -44,81 +47,81 @@ namespace GuestBook.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3209c06d-747b-4d3e-9663-5a7c26e0bffb"),
+                            Id = new Guid("736e92cf-2d33-4e7e-91f3-edb01b284a31"),
                             Content = "I was here1",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 453, DateTimeKind.Local).AddTicks(9782),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 171, DateTimeKind.Local).AddTicks(8876),
                             Email = "mariusz@gmail.com",
                             Name = "Mariusz"
                         },
                         new
                         {
-                            Id = new Guid("d7fc5e3e-853c-43c7-9f91-d24b6d1b2e1a"),
+                            Id = new Guid("440bcfb7-0f60-4a9b-9b50-9b5f405cd7dc"),
                             Content = "I was here2",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3694),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9034),
                             Email = "mariusz@gmail.com",
                             Name = "Marian"
                         },
                         new
                         {
-                            Id = new Guid("272a48c6-da96-4715-a89b-5a2cd7251724"),
+                            Id = new Guid("0513af24-4872-4bfa-80c9-328d43346ecd"),
                             Content = "I was here3",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3762),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9113),
                             Email = "mariusz@gmail.com",
                             Name = "Maria"
                         },
                         new
                         {
-                            Id = new Guid("0f4e265c-47ac-49f7-b7ba-9ccc1619fcd7"),
+                            Id = new Guid("28185d09-eb75-475b-a527-5a4b1fe64a64"),
                             Content = "I was here4",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3769),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9122),
                             Email = "mariusz@gmail.com",
                             Name = "Mateusz"
                         },
                         new
                         {
-                            Id = new Guid("29fa8852-881d-4892-9152-2a1ec8428ebd"),
+                            Id = new Guid("e4c01e26-799f-4677-87cb-11dadb7302ff"),
                             Content = "I was here5",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3773),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9127),
                             Email = "mariusz@gmail.com",
                             Name = "Michal"
                         },
                         new
                         {
-                            Id = new Guid("214fd015-b098-4dce-8e9e-1cb33e0f940a"),
+                            Id = new Guid("93230c51-44db-439f-ab49-3f4060ea967b"),
                             Content = "I was here6",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3780),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9135),
                             Email = "mariusz@gmail.com",
                             Name = "Milosz"
                         },
                         new
                         {
-                            Id = new Guid("4e596f77-21ea-4244-9083-9a7d4a633864"),
+                            Id = new Guid("dab67b21-0cb4-4941-914f-787739a7bc9e"),
                             Content = "I was here7",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3784),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9141),
                             Email = "mariusz@gmail.com",
                             Name = "Marzena"
                         },
                         new
                         {
-                            Id = new Guid("aa202224-9bb2-4ac5-a76c-905215b03b96"),
+                            Id = new Guid("dcff7868-a4a7-4040-8af7-da9ae1c9cc86"),
                             Content = "I was here8",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3795),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9146),
                             Email = "mariusz@gmail.com",
                             Name = "Milena"
                         },
                         new
                         {
-                            Id = new Guid("f6bf0515-a5e1-4b6a-998d-0a9c09bec526"),
+                            Id = new Guid("36f3f8d0-18cd-43b7-8c20-dd9c540889cd"),
                             Content = "I was here9",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3799),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9163),
                             Email = "mariusz@gmail.com",
                             Name = "Marlena"
                         },
                         new
                         {
-                            Id = new Guid("f34896e3-925c-45e8-9ea8-524121876081"),
+                            Id = new Guid("66819e43-f281-4ec7-87ea-86ed5cab77b7"),
                             Content = "I was here10",
-                            CreateTime = new DateTime(2022, 7, 11, 14, 3, 32, 458, DateTimeKind.Local).AddTicks(3804),
+                            CreateTime = new DateTime(2022, 7, 13, 9, 4, 23, 177, DateTimeKind.Local).AddTicks(9171),
                             Email = "mariusz@gmail.com",
                             Name = "Marek"
                         });

@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GuestBook.Data;
+using GuestBook.Data.DAL.Interfaces;
+using GuestBook.Data.DAL;
 
 namespace GuestBook
 {
@@ -28,6 +30,8 @@ namespace GuestBook
             services.AddControllersWithViews();
 
             services.AddDbContext<GuestBookContext>();
+
+            services.AddScoped<IPostRepository, PostRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

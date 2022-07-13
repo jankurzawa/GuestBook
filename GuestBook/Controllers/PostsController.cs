@@ -8,29 +8,33 @@ using Microsoft.EntityFrameworkCore;
 using GuestBook.Data;
 using GuestBook.Models;
 using GuestBook.Data.DAL;
+using GuestBook.Data.DAL.Interfaces;
 
 namespace GuestBook.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly GuestBookContext _context;
-        private int _numberOfPage;
+        private readonly IPostRepository _postRepository;
+        private static int _numberOfPage = 1;
 
-        public PostsController(GuestBookContext context)
+        public PostsController(IPostRepository postRepository)
         {
-            _context = context;
-            _numberOfPage = 1;
+            _postRepository = postRepository;
         }
 
         // GET: Posts
-        public async Task<IActionResult> Index() => View(PostRepository.GetPage(_numberOfPage));
-
-        // GET: Posts/Index
-        public async Task<IActionResult> PageUp()
+        public async Task<IActionResult> Index()
         {
-            if (_numberOfPage < PostRepository.GetNumberOfPosts())
+            TempData["numberOfPage"] = _numberOfPage;
+            var gowno = _postRepository.GetPage(_numberOfPage);
+            return View(gowno);
+        }
+        // GET: Posts/Index
+        public IActionResult PageUp()
+        {
+            if (_numberOfPage < _postRepository.GetNumberOfPosts())
                 _numberOfPage++;
-            return View(PostRepository.GetPage(_numberOfPage));
+            return RedirectToAction("Index");
         }
 
         // GET: Posts
@@ -38,7 +42,7 @@ namespace GuestBook.Controllers
         {
             if (_numberOfPage > 1)
                 _numberOfPage--;
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         // GET: Posts/Create
@@ -53,8 +57,7 @@ namespace GuestBook.Controllers
         {
             if (ModelState.IsValid)
             {
-                post.Id = Guid.NewGuid();
-                PostRepository.AddNewPost(post);
+                _postRepository.AddNewPost(post);
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
