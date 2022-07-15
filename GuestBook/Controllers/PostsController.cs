@@ -9,6 +9,7 @@ using GuestBook.Data;
 using GuestBook.Models;
 using GuestBook.Data.DAL;
 using GuestBook.Data.DAL.Interfaces;
+using Microsoft.AspNetCore.Html;
 
 namespace GuestBook.Controllers
 {
@@ -26,22 +27,37 @@ namespace GuestBook.Controllers
         public async Task<IActionResult> Index()
         {
             TempData["numberOfPage"] = _numberOfPage;
-            var gowno = _postRepository.GetPage(_numberOfPage);
-            return View(gowno);
+            TempData["maxPages"] = _postRepository.GetNumberOfPages();
+            return View(_postRepository.GetPage(_numberOfPage));
         }
         // GET: Posts/Index
         public IActionResult PageUp()
         {
-            if (_numberOfPage < _postRepository.GetNumberOfPosts())
+            if (_numberOfPage < _postRepository.GetNumberOfPages())
                 _numberOfPage++;
             return RedirectToAction("Index");
         }
 
         // GET: Posts
-        public async Task<IActionResult> PageDown()
+        public IActionResult PageDown()
         {
             if (_numberOfPage > 1)
                 _numberOfPage--;
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult ChangePageFromInputLabel(string inputValue)
+        {
+            try
+            {
+                int newPage = int.Parse(inputValue);
+                if (newPage >= 1 && newPage <= _postRepository.GetNumberOfPages())
+                    _numberOfPage = newPage;
+            }
+            catch (Exception)
+            {
+
+            }
             return RedirectToAction("Index");
         }
 
@@ -61,6 +77,11 @@ namespace GuestBook.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
+        }
+        public IActionResult SetNumberOfPostFromInput(string numberOfPages)
+        {
+            PostRepository._numberOfPostOnPage = int.Parse(numberOfPages);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -3,105 +3,79 @@
 @{
     ViewData["Title"] = "Index";
 }
-<style>
-    #pageDetails{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
 
-    #pageDetails h1{
-        justify-content: flex-start;
-        font-size: 30px;
-    }
-
-    #pagination{
-        display: inline-flex;
-        justify-content: flex-end;
-    }
-
-    #numberOfVictims{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    #specificPageInput{
-        margin-left: 25%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    }
-
-    #specificPageInput input{
-        width: 50px;
-        height: 28px;
-    }
-    #numberOfVictims h4{
-        justify-content: center;
-        margin: 17%;
-
-    }
-    .table body{
-        font-size: 8px;
-    }
-    #parentOfNumberOfPage{
-        justify-content: center;
-    }
-
-</style>
+<link rel="stylesheet" href="~/css/listOfGuests.css">
 
 <div id="pageDetails">  
     <h1>List of guests</h1> 
-    
+
     <div id="pagination">   
-        <div id="numberOfVictims">
-            <img id="leftArrow" src="~/Pictures/ArrowBack.png" onclick="leftArrowClick()">
-            <div id="parentOfNumberOfPage">
-                <h4 id="numberOfPage">@TempData["numberOfPage"]</h4>
+        <div id="upBox">
+            <div id="manualChanger">
+                <div id="pageSummary">
+                    <h4 id="numberOfPage">@TempData["numberOfPage"] / @TempData["maxPages"]</h4>
+                </div>
+                <div id="arrows">
+                    <a id="rightArrow" asp-area="" asp-controller="Posts" asp-action="PageDown"><img src="~/Pictures/ArrowBack.png"/></a>
+                    <a id="rightArrow" asp-area="" asp-controller="Posts" asp-action="PageUp"><img src="~/Pictures/ArrowForward.png"/></a>
+                </div>
             </div>
-            
-            <a id="rightArrow" src="~/Pictures/ArrowForward.png" asp-area="" asp-controller="Posts" asp-action="PageUp">PageUp</a>
-        </div>
-        <div id="specificPageInput">
-            <input type="text" id="numberOfPageInput" name="numberOfPage" cols="2" rows="1" data-role="page-number-input" onchange="pickPageFromInputLabel(value)">
+        
+            <div id="specificPageInput">
+                <div id="inputBox">
+                    <form asp-controller="Posts" asp-action="ChangePageFromInputLabel" method="post">
+                        <button type="submit">Go to page:</button>
+                        <input id="inputValue" name="inputValue" type="text" value="" />
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    
+
+</div>
+<div id="numberOfPostOnOnePage">
+    <div id="numberOfPostOnOnePageChild">
+        <h8>Number of posts for the one page:</h8>
+        <a id="fivePostsOnPage" asp-area="" asp-controller="Posts" asp-action="SetNumberOfPostFromInput" asp-route-numberOfPages="5">05</a>
+        <a id="tenPostsOnPage" asp-area="" asp-controller="Posts" asp-action="SetNumberOfPostFromInput" asp-route-numberOfPages="10">10</a>
+        <a id="twentyPostsOnPage" asp-area="" asp-controller="Posts" asp-action="SetNumberOfPostFromInput" asp-route-numberOfPages="20">20</a>
+    </div>
 </div>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add Your Post!</a>
 </p>
-<table class="table">
-    <thead>
+<div id="parrentOfTable">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <body>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <body>
-@foreach (var item in Model) {
-        <tr>
-            <td>
+            <td class="createTime">
                 @Html.DisplayFor(modelItem => item.CreateTime)
             </td>
-            <td>
+            <td class="name">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            <td class="contentOfPost">
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
         </tr>
-}
-    <script src="~/js/pagination.js"></script>
-    </body>
-</table>
+    }
+        <script src="~/js/pagination.js"></script>
+        </body>
+    </table>
+</div>

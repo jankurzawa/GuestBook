@@ -12,7 +12,7 @@ namespace GuestBook.Models
             ErrorMessage = "You can't use only white spaces")]
         public string Name { get; set; }
         [Required]
-        [RegularExpression(@"/ ^\w + ([\.-] ?\w +)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/",
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
             ErrorMessage = "Your e-mail is not correct.")]
         public string Email { get; set; }
         [Required]
