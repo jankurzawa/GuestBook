@@ -23,8 +23,8 @@ namespace GuestBook.Data.DAL
         {
             var numberOfLastPosts = _guestBookContext.Posts.Count() % _numberOfPostOnPage;
             if (numberOfLastPosts != 0 && numberOfPage == GetNumberOfPages())
-                return _guestBookContext.Posts.ToList().OrderBy(p => p.CreateTime).TakeLast(numberOfLastPosts).ToList();
-            return _guestBookContext.Posts.ToList().OrderBy(p => p.CreateTime).Take(_numberOfPostOnPage * numberOfPage).TakeLast(_numberOfPostOnPage).ToList();
+                return _guestBookContext.Posts.ToList().OrderByDescending(p => p.CreateTime).TakeLast(numberOfLastPosts).ToList();
+            return _guestBookContext.Posts.ToList().OrderByDescending(p => p.CreateTime).Take(_numberOfPostOnPage * numberOfPage).TakeLast(_numberOfPostOnPage).ToList();
         }
         public void AddNewPost(Post newPost)
         {

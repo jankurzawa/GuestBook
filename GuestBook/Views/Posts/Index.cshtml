@@ -23,9 +23,9 @@
         
             <div id="specificPageInput">
                 <div id="inputBox">
-                    <form asp-controller="Posts" asp-action="ChangePageFromInputLabel" method="post">
-                        <button type="submit">Go to page:</button>
-                        <input id="inputValue" name="inputValue" type="text" value="" />
+                    <form id="goToPageForm" asp-controller="Posts" asp-action="ChangePageFromInputLabel" method="post">
+                        <button id="goToPageButton" type="submit">Go to page:</button>
+                        <input id="inputValue" name="inputValue" type="text" value="" cols="3" rows="1"/>
                     </form>
                 </div>
             </div>

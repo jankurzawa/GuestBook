@@ -105,6 +105,11 @@
     align-items: center;
     justify-content: flex-end;
 }
+#inputBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #specificPageInput input {
     width: 100%;
@@ -131,3 +136,16 @@
     margin-left: 15%;
 }
 
+
+#inputValue{
+    width: 50%;
+    align-items: center;
+}
+#goToPageButton {
+    width: 100%;
+}
+#goToPageForm {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
